@@ -1,16 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Botao, BotaoTexto, Container, Title, Nome } from './src/styles';
+import React from 'react';
+import { StatusBar } from 'react-native';
 
-export default function App() {
-  return (
-    <Container>
-      <Title cor="#ff0000">Ethan Leal</Title>
-      <Nome>Hello, World!</Nome>
-      <Botao onPress={() => alert('Botão funcionando!')} >
-        <BotaoTexto>Entrar</BotaoTexto>
-      </Botao>
-      <StatusBar style='auto'/>
-    </Container>
-  );
+import { NavigationContainer } from '@react-navigation/native';
+
+import Routes from './src/routes/index';
+
+export default function App(){
+  return(
+    <NavigationContainer>
+      <StatusBar backgroundColor="#23083d" barStyle="dark-content" />
+      <Routes/>
+    </NavigationContainer>
+  )
 }
