@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Platform } from 'react-native';
 
 import {
@@ -10,8 +10,16 @@ import {
   SubmitText
 } from '../SignIn/styles'
 
+import { AuthContext } from '../../contexts/auth'
+
 
 export default function SignUp(){
+  const { user }  = useContext(AuthContext);
+  
+  function handleSignUp(){
+    alert(user.nome);
+  }
+  
   return(
     <Background style={{backgroundColor: '#d2d2d2'}}>
       <Container
@@ -34,7 +42,7 @@ export default function SignUp(){
             placeholder="Sua senha"
           />
         </AreaInput>
-        <SubmitButton activeOpacity={0.7} >
+        <SubmitButton activeOpacity={0.7} onPress={handleSignUp}>
           <SubmitText>Cadastrar</SubmitText>
         </SubmitButton>
 
