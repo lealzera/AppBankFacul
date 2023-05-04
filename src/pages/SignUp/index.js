@@ -1,52 +1,67 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Platform } from 'react-native';
 
-import {
-  Background,
-  Container,
-  AreaInput,
-  Input,
-  SubmitButton,
+import { 
+  Background, 
+  Container, 
+  AreaInput, 
+  Input, 
+  SubmitButton, 
   SubmitText
-} from '../SignIn/styles'
+} from '../SignIn/styles';
 
-import { AuthContext } from '../../contexts/auth'
+import { AuthContext } from '../../contexts/auth';
 
 
 export default function SignUp(){
-  const { user }  = useContext(AuthContext);
-  
+
+  const { signUp } = useContext(AuthContext)
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   function handleSignUp(){
-    alert(user.nome);
+    signUp(email, password, nome);
   }
-  
+
   return(
-    <Background style={{backgroundColor: '#d2d2d2'}}>
+    <Background>
       <Container
-      behavior={Platform.OS === 'ios' ? 'padding' : ''} 
-      enabled
+        behavior={Platform.OS === 'ios' ? 'padding' : ''}
+        enabled
       >
-        <AreaInput>          
+
+        <AreaInput>
           <Input
-            placeholder="Nome e Sobrenome"
+            placeholder="Nome"
+            value={nome}
+            onChangeText={ (text) => setNome(text) }
           />
         </AreaInput>
-        <AreaInput>          
+
+        <AreaInput>
           <Input
             placeholder="Seu email"
-            keyboardType="email-address"
+            value={email}
+            onChangeText={ (text) => setEmail(text) }
           />
         </AreaInput>
-        <AreaInput>          
+
+        <AreaInput>
           <Input
             placeholder="Sua senha"
+            value={password}
+            onChangeText={ (text) => setPassword(text) }
+            secureTextEntry={true}
           />
         </AreaInput>
-        <SubmitButton activeOpacity={0.7} onPress={handleSignUp}>
+
+        <SubmitButton onPress={handleSignUp}>
           <SubmitText>Cadastrar</SubmitText>
         </SubmitButton>
 
       </Container>
+
     </Background>
   )
 }
